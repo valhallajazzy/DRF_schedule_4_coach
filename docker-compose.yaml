@@ -1,0 +1,16 @@
+version: "3.0"
+services:
+  db:
+    image: postgres:latest
+    container_name: schedule_4_coach_db
+    restart: always
+    volumes:
+      - ./mailing_service/postgres_data:/var/lib/postgresql/data
+    networks:
+      - schedule_4_coach
+    environment:
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=postgres
+       - POSTGRES_DB=schedule_4_coach_db
+    ports:
+      - "5435:5432"
