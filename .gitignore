@@ -4,3 +4,4 @@ schedule_db/
 core/__pycache__/
 poetry_lock
  .idea/
+ schedule_api/__pycache__/
