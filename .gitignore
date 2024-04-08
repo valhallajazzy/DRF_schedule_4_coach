@@ -1,4 +1,5 @@
 .env
 venv
 schedule_db/
+core/__pycache__/
 
