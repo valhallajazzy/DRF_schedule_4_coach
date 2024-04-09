@@ -1,7 +1,8 @@
 .env
 venv
 schedule_db/
+schedule_api/__pycache__/
 core/__pycache__/
 poetry_lock
- .idea/
- schedule_api/__pycache__/
+.idea/
+schedule_api/migrations/__pycache__/

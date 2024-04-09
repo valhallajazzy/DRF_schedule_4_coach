@@ -47,8 +47,9 @@ class Coach(models.Model):
 
 
 class Training(models.Model):
-    training_date = models.DateField(db_index=True)
-    training_time = models.TimeField(db_index=True)
+    training_date = models.DateField(db_index=True, verbose_name='Запланированная дата тренировки')
+    start_time = models.TimeField(db_index=True, verbose_name='Время начала занятия')
+    stop_time = models.TimeField(db_index=True, verbose_name='Время окончания занятия')
     client = models.ForeignKey(Client,
                                on_delete=models.CASCADE,
                                verbose_name='Клиент',

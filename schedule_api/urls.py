@@ -1,14 +1,19 @@
-from rest_framework.routers import DefaultRouter
+from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-from schedule_api.views import  ClientViewSet
+from schedule_api.views import (ClientViewSet, CoachViewSet, SportClubViewSet,
+                                TrainingDestroyAPIView, TrainingAPIView)
 
-router = DefaultRouter()
+router = SimpleRouter()
 
-# router.register("couches/", CouchViewSet)
+router.register("coaches", CoachViewSet)
 router.register("clients", ClientViewSet)
-# router.register("clubs/", SportClubViewSet)
-# router.register("trainings/", TrainingsViewSet)
+router.register("clubs", SportClubViewSet)
 
-urlpatterns = []
+
+urlpatterns = [
+    path("trainings/", TrainingAPIView.as_view()),
+    path("trainings/<int:pk>", TrainingDestroyAPIView.as_view())
+]
 
 urlpatterns.extend(router.urls)
