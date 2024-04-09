@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.generics import DestroyAPIView
+from rest_framework.generics import DestroyAPIView, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -46,3 +46,20 @@ class TrainingAPIView(APIView):
 class TrainingDestroyAPIView(DestroyAPIView):
     queryset = Training.objects.all()
     serializer_class = TrainingSerializer
+
+
+class ScheduleAPIView(APIView):
+    def get(self, request, id):
+        coach = get_object_or_404(Coach.objects.prefetch_related('works'), id=id)
+        schedule_by_clubs = {key.name: [] for key in coach.sport_clubs.all()}
+        works = coach.works.all().order_by('club')
+        for work in works:
+            schedule_by_clubs[work.club.name].append(
+                {
+                    'training_date': work.training_date,
+                    'start_time': work.start_time,
+                    'stop_time': work.stop_time,
+                    'client': f"{work.client.last_name} {work.client.first_name} {work.client.middle_name}",
+                }
+            )
+        return Response({'coach': CoachSerializer(coach).data, 'schedule': schedule_by_clubs})
