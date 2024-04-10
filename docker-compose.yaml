@@ -9,12 +9,40 @@ services:
     networks:
       - schedule_4_coach
     environment:
-       - POSTGRES_USER=postgres
-       - POSTGRES_PASSWORD=postgres
-       - POSTGRES_DB=schedule_4_coach_db
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5435:5432"
 
+  schedule_app:
+    container_name: schedule_app
+    build:
+      context: .
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./core:/DRF_shedule_4_coach/core
+      - ./schedule_api:/DRF_shedule_4_coach/schedule_api
+    env_file:
+      - .env
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8002"
+    networks:
+      - schedule_4_coach
+    depends_on:
+      - db
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5051:80
+    depends_on:
+      - db
 
 networks:
  schedule_4_coach:
