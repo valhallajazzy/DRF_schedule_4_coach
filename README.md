@@ -1,6 +1,7 @@
 # Расписание для тренеров в фитнес-клубах (API)
-Данный проект позволяет получить API расписания тренировок. Тренировки отсортированы по фитнес-клубам.
-![Screenshot](https://github.com/valhallajazzy/goszakparser/blob/main/pictures/env.png)
+Данный проект позволяет получить API расписания тренировок.  
+Тренировки отсортированы по фитнес-клубам.  
+![Screenshot](https://github.com/valhallajazzy/DRF_schedule_4_coach/blob/main/picture/scheduleAPI.png)
 
 Так же поддерживаются CRUD-операции по объектам с соответствующими атрибутами:
 * Клиент (Client)
@@ -22,7 +23,7 @@
 ## Подготовка и запуск проекта
 * Создаем файл `.env` в корневой директории проекта и указываем переменные `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `DB_PORT`  
 для подключения Django к базе данных:
-![Screenshot](https://github.com/valhallajazzy/goszakparser/blob/main/pictures/env.png)
+![Screenshot](https://github.com/valhallajazzy/DRF_schedule_4_coach/blob/main/picture/schedule_env.png)
 * Запускаем приложение, с БД и PG-admin командой в docker-compose:
 ```console
 $ docker-compose up -d
